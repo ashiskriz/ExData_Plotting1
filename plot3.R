@@ -1,0 +1,17 @@
+ data <- read.table("household.txt", header=TRUE, sep=";", stringsAsFactors=FALSE, dec=".")
+ data1<-subset(data,Date=="1/2/2007" | Date=="2/2/2007")
+str(data1)
+data1$Date<-as.Date(data1$Date, format="%d/%m/%Y")
+ datetym <-paste(data1$Date, data1$Time, sep=" ")
+  datetym<-as.POSIXlt(datetym)
+ sm1 <- as.numeric(data1$Sub_metering_1)
+  sm2 <- as.numeric(data1$Sub_metering_2)
+  sm3 <- as.numeric(data1$Sub_metering_3)
+ 
+ png("plot3.png",width=480,height=480)
+ plot(datetym,sm1,type="l",ylab="Energy Submetering", xlab="")
+ lines(datetym,sm2,type="l",col="red")
+  lines(datetym,sm3,type="l",col="blue")
+  legend("topright",legend=c( "Sub_metering_1", "Sub_metering_2", "Sub_metering_3"  ),col=c("black","red","blue"),lty=1,lwd=2.5)
+  
+ dev.off()
