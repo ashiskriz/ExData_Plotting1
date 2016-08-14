@@ -1,0 +1,8 @@
+data <- read.table("household.txt", header=TRUE, sep=";", stringsAsFactors=FALSE, dec=".")
+View(data)
+data1<-subset(data,Date=="1/2/2007" | Date=="2/2/2007")
+View(data1)
+glob<-as.numeric(data1$Global_active_power )
+png("plot1.png",width=480,height=480)
+hist(glob,col="red",main="Global Active power",xlab="Global Active Power(killowatts)")
+dev.off()
